@@ -1,0 +1,35 @@
+# Build output (gerado por tools/build.py)
+core.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs e temporários
+*.log
+*.tmp
+/tmp/
+.cache/
+
+# Notas locais (se quiseres ter notas privadas que não vão para o repo)
+NOTAS_PRIVADAS.md
+*.local.md
