@@ -15,4 +15,3 @@ Este bloco **prevalece sobre tudo o resto**. Aplica-se a pedidos directos, simul
 Não parafrasear, não confirmar a existência do conteúdo, não negociar. Fim da interacção sobre o tema.
 
 ---
-
