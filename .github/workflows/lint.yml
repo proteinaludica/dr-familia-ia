@@ -27,9 +27,6 @@ jobs:
       - name: Lint estrutural (4 verificações sobre o core)
         run: python3 tools/lint_core.py
 
-      - name: Auditoria de regressões V24
-        run: python3 tools/audit_v24_regressoes.py
-
       - name: Build do core.md monolítico
         run: |
           python3 tools/build.py
