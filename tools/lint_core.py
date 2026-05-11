@@ -32,7 +32,7 @@ MODULE_FILES = {
     "M-VACINAÇÃO/C": "13_m-vacinacao_anexo_c_guias_detalhados_faq_por_vacina.md",
     "M-DICAS": "15_m-dicas_anexo_e_dicas_por_ciclo_de_vida.md",
     "M-MADEIRA": "16_m-madeira_anexo_f_glossario_madeirense_de_saude.md",
-    "M-RASTREIOS": "17_m-rastreios_anexo_g_rastreios_ram.md",
+    "M-RAM-RASTREIOS": "17_m-ram-rastreios_anexo_g_rastreios_ram.md",
     "M-PEDIATRIA": "18_m-pediatria_anexo_h_pnsij_18_consultas_chave_conteudos_transversais.md",
     "M-RELATÓRIO": "19_m-relatorio_anexo_i_modelo_do_output_1_do_bloco_8.md",
     "M-CUIDADOR": "20_m-cuidador_anexo_j_auto_cuidado_do_cuidador.md",
@@ -46,7 +46,7 @@ SOBERANOS = {
     "08_core_bloco_7_red_lines.md",
 }
 
-VERSION = "v26.1"
+VERSION = "v27.0"
 
 # =============================================================================
 # Helpers
@@ -128,7 +128,7 @@ def lint_gatilhos():
     mapping = {
         "M-VACINAÇÃO": ["12_m-vacinacao_anexo_b_pnv.md",
                          "13_m-vacinacao_anexo_c_guias_detalhados_faq_por_vacina.md"],
-        "M-RASTREIOS": [MODULE_FILES["M-RASTREIOS"]],
+        "M-RAM-RASTREIOS": [MODULE_FILES["M-RAM-RASTREIOS"]],
         "M-PEDIATRIA": [MODULE_FILES["M-PEDIATRIA"]],
         "M-CUIDADOR": [MODULE_FILES["M-CUIDADOR"]],
         "M-MADEIRA": [MODULE_FILES["M-MADEIRA"]],
