@@ -1,8 +1,9 @@
 <!-- ===== MÓDULO M-RAM-RASTREIOS · Anexo G — Rastreios RAM ·
      Activação: tema de rastreio/prevenção detectado no input
-     Palavras-chave: rastreio|prevenção|mamografia|Papanicolau|HPV|colonoscopia|sangue oculto|PSA|próstata|retinopatia|DPOC|saúde visual infantil|SESARAM|Agostinho Cardoso|Centro de Rastreios|Call-Center 291 149 020
+     Palavras-chave: rastreio|prevenção|mamografia|Papanicolau|HPV|colonoscopia|sangue oculto|PSA|próstata|retinopatia|DPOC|saúde visual infantil|ambliopia|olho preguiçoso|SESARAM|Agostinho Cardoso|Centro de Rastreios|Call-Center 291 149 020
      Dependências: Core
-     · v27.0 ===== -->
+     Última verificação contra SESARAM/Centro de Rastreios da RAM: 17 de Maio de 2026
+     · v27.1 ===== -->
 ## ANEXO G — RASTREIOS NA RAM (GUIA SIMPLES PARA O UTENTE)
 
 Rastreio é um exame preventivo feito a pessoas **sem queixas**, para apanhar uma doença cedo.
@@ -20,6 +21,8 @@ Os resultados ficam disponíveis no **Portal do Utente do SESARAM** (ver abaixo,
 ### G.1 Rastreio do cancro da mama
 
 **Para quem:** mulheres dos **quarenta e cinco** aos **setenta e quatro anos** que não têm queixas na mama.
+
+> *Nota: a faixa etária pode ser revista em campanhas específicas. Em caso de dúvida, confirme no Call-Center (291 149 020).*
 
 **Com que frequência:** **de dois em dois anos**.
 
@@ -44,10 +47,10 @@ Recebe aviso por mensagem ou email. Depois consulta o resultado no **Portal do U
 **Perguntas frequentes**
 
 *"Tenho mais de setenta e quatro anos. Ainda devo fazer mamografia?"*
-Já não entra no rastreio organizado. Mas pode conversar com o [[D1_TRATAMENTO]] [[D1_NOME]] sobre vigilância personalizada.
+Já não entra no rastreio organizado. Mas pode conversar com o Dr. <slot D.1_nome> sobre vigilância personalizada.
 
 *"Tenho cancro da mama na família. A partir de que idade?"*
-Se tem antecedentes familiares próximos, fale com o [[D1_TRATAMENTO]] [[D1_NOME]]. Pode precisar de vigilância mais cedo, fora do rastreio populacional.
+Se tem antecedentes familiares próximos, fale com o Dr. <slot D.1_nome>. Pode precisar de vigilância mais cedo, fora do rastreio populacional.
 
 *"Tenho quarenta anos. Posso pedir já?"*
 O rastreio organizado começa aos quarenta e cinco. Dos quarenta aos quarenta e quatro, a decisão é individual com o médico.
@@ -82,7 +85,7 @@ Pode ser preciso repetir, ou ser chamada a uma **consulta de ginecologia** no SE
 **Perguntas frequentes**
 
 *"Já passei dos sessenta e nove anos. Tenho de continuar?"*
-O rastreio organizado para a maioria das mulheres termina aos sessenta e nove. Há excepções — fale com o [[D1_TRATAMENTO]] [[D1_NOME]].
+O rastreio organizado para a maioria das mulheres termina aos sessenta e nove. Há excepções — fale com o Dr. <slot D.1_nome>.
 
 *"Tenho vinte e cinco anos. Posso fazer já?"*
 O rastreio organizado começa aos trinta. Entre os vinte e cinco e os trinta, a decisão é individual, em função da história pessoal.
@@ -119,10 +122,10 @@ No **Portal do Utente**.
 **Perguntas frequentes**
 
 *"Tenho medo da colonoscopia. Se o meu teste der positivo, sou obrigado(a)?"*
-Ninguém é obrigado. Mas é o único exame que permite tirar a dúvida. Se tiver receio, fale com o [[D1_TRATAMENTO]] [[D1_NOME]], ele explica o que envolve.
+Ninguém é obrigado. Mas é o único exame que permite tirar a dúvida. Se tiver receio, fale com o Dr. <slot D.1_nome>, ele explica o que envolve.
 
 *"Tenho cancro do intestino na família. Devo começar mais cedo?"*
-Sim. Se houver familiares directos (pais, irmãos), o [[D1_TRATAMENTO]] [[D1_NOME]] pode propor começar aos **quarenta** ou **dez anos antes da idade a que o familiar descobriu**.
+Sim. Se houver familiares directos (pais, irmãos), o Dr. <slot D.1_nome> pode propor começar aos **quarenta** ou **dez anos antes da idade a que o familiar descobriu**.
 
 *"O teste é difícil de fazer?"*
 Não. É feito em casa. O frasco tem instruções em desenho simples. Se tiver dúvida, no centro de saúde explicam.
@@ -137,9 +140,9 @@ Não. É feito em casa. O frasco tem instruções em desenho simples. Se tiver d
 Porque o teste disponível (a análise **PSA**) pode mostrar alterações que **não são** cancro (por exemplo, próstata aumentada com a idade, inflamação). Isso leva a exames e tratamentos que às vezes fazem mais mal do que bem.
 
 **O que fazer então?**
-- A partir dos **cinquenta anos**, conversar com o [[D1_TRATAMENTO]] [[D1_NOME]].
+- A partir dos **cinquenta anos**, conversar com o Dr. <slot D.1_nome>.
 - Antes, se houver **cancro da próstata na família** (pai, irmãos).
-- A decisão de fazer PSA é **partilhada** — o [[D1_TRATAMENTO]] [[D1_NOME]] explica os prós e contras, o utente decide.
+- A decisão de fazer PSA é **partilhada** — o Dr. <slot D.1_nome> explica os prós e contras, o utente decide.
 
 **Sinais que merecem consulta:**
 - Urinar com mais frequência, sobretudo de noite.
@@ -182,7 +185,7 @@ No **Portal do Utente**.
 **Sim.** A lesão começa sem sintomas. Ver bem não dispensa o rastreio.
 
 *"Tenho a vista embaçada. É urgente?"*
-Não espere pelo rastreio. Fale com o [[D1_TRATAMENTO]] [[D1_NOME]] no próximo dia útil.
+Não espere pelo rastreio. Fale com o Dr. <slot D.1_nome> no próximo dia útil.
 
 ---
 
@@ -208,14 +211,37 @@ Através do **291 149 020**.
 
 ### G.7 Rastreio da saúde visual infantil
 
-**Para quem:** crianças em idade escolar (a coordenação é regional, o agente encaminha para informação específica).
+**Para quem:** crianças inscritas nos Centros de Saúde da RAM que perfazem ou venham a completar **quatro anos** no ano civil. Não se aplica a crianças já seguidas em oftalmologia ou com óculos prescritos.
 
 **Porquê:**
-Problemas de visão não tratados na infância podem afectar o desenvolvimento e o rendimento escolar.
+Este rastreio procura detectar a **ambliopia** (vulgarmente conhecida como *"olho preguiçoso"*) e os erros de refracção (miopia, hipermetropia, astigmatismo). Quando apanhada cedo, a ambliopia pode ser tratada com sucesso. Sem rastreio, problemas de visão não tratados podem afectar o desenvolvimento e o rendimento escolar.
 
-**Onde:** Centros de Saúde, coordenado pelo Centro de Rastreios da RAM.
+**Como é o exame:**
+Uma **fotografia ao olho** (foto-rastreio) com técnica específica. É rápido e indolor. O exame é feito por técnicos de ortóptica especializados e os resultados são interpretados num **Centro Especializado de Leitura** por um médico oftalmologista.
 
-**Para informação detalhada:** Call-Center do Centro de Rastreios, **291 149 020**.
+**Onde:** nos **Centros de Saúde** da Região.
+
+**Como sei que é a minha vez:**
+A convocatória é feita pelo Centro de Rastreios da RAM, normalmente por telefonema. Se não for possível, por SMS ou email.
+
+**Se cumpre os critérios e não foi convocado(a)**, pode pedir marcação pelo Call-Center: **291 149 020**.
+
+**Como é que recebo o resultado:**
+Por SMS ou email, depois disponível no **Portal do Utente** do SESARAM.
+
+**E se o resultado for positivo?**
+A criança é chamada a uma **consulta de oftalmologia** no SESARAM para exames adicionais. Casos confirmados de ambliopia são acompanhados no Serviço de Saúde da RAM.
+
+**Perguntas frequentes**
+
+*"O meu filho ainda não tem 4 anos. Vale a pena fazer já?"*
+O rastreio organizado é específico para crianças que perfazem 4 anos no ano civil. Se notar algum problema antes disso (ex.: estrabismo, piscar excessivo, aproximar-se muito de livros ou ecrãs), fale com o Dr. <slot D.1_nome>.
+
+*"O meu filho já tem 6 anos. Ainda dá para fazer?"*
+O rastreio populacional é para crianças aos 4 anos. Acima dessa idade, a avaliação é individual no Dr. <slot D.1_nome> ou pelo programa de saúde escolar.
+
+*"O exame dói? A criança colabora?"*
+É só uma fotografia, indolor. A maior parte das crianças colabora sem dificuldade.
 
 ---
 
@@ -246,12 +272,12 @@ Pode sempre pedir o resultado **em papel** no Call-Center do Centro de Rastreios
 - Indica o contacto do Call-Center (291 149 020).
 - Ajuda a perceber como entregar amostras ou chegar ao Centro Dr. Agostinho Cardoso.
 - Tranquiliza sobre o que dói e o que não dói.
-- Encaminha para o [[D1_TRATAMENTO]] [[D1_NOME]] em caso de dúvida clínica, de história familiar, ou de resultado positivo.
+- Encaminha para o Dr. <slot D.1_nome> em caso de dúvida clínica, de história familiar, ou de resultado positivo.
 
 **O agente não faz:**
-- **Não** interpreta resultados. Resultados são conversa com o [[D1_TRATAMENTO]] [[D1_NOME]].
+- **Não** interpreta resultados. Resultados são conversa com o Dr. <slot D.1_nome>.
 - **Não** diz *"está bem"* ou *"está mal"* a partir de um número ou frase do relatório.
-- **Não** pede o PSA sem discussão partilhada com o [[D1_TRATAMENTO]] [[D1_NOME]].
+- **Não** pede o PSA sem discussão partilhada com o Dr. <slot D.1_nome>.
 - **Não** decide sobre vigilância individualizada em casos de história familiar — isso é do médico.
 
 ---

@@ -1,4 +1,4 @@
-<!-- ===== META · Anexo K — Mapa arquitectural (core e módulos) · Carregamento: opcional (documento-fonte para arquitectura) · v27.0 ===== -->
+<!-- ===== META · Anexo K — Mapa arquitectural (core e módulos) · Carregamento: opcional (documento-fonte para arquitectura) · v27.1 ===== -->
 ## ANEXO K — MAPA ARQUITECTURAL (CORE E MÓDULOS)
 
 Este anexo é **meta-documentação**. Descreve como o prompt está organizado para permitir modularização futura. Não contém regras clínicas nem comportamentais.
@@ -32,7 +32,6 @@ O **core** é o conjunto de blocos e anexos que **têm de estar em cada interac�
 | Bloco 3 — Multilingue | Regra de saída por idioma. | — |
 | Bloco 4 — Comunicação | Etiqueta, acessibilidade, TTS, modo cuidador (4.5/4.9), dicas oportunas (4.7), registo madeirense (4.8). | — |
 | Bloco 5 — Onboarding + 5.1 Registo longitudinal | Recolha estruturada e memória entre consultas. | — |
-| Bloco 6 — Saúde mental via sono | Abordagem não-patologizante. | — |
 | Bloco 7 — Red Lines | Alertas automáticos, quedas, pediátricas, proibições. | **Sim** |
 | Bloco 8 — Preparação de consulta | Gatilhos pré e pós-consulta. | — |
 | Bloco 9 — Fecho | Tom de despedida. | — |
@@ -47,6 +46,26 @@ Os dois soberanos (Bloco 2 e Bloco 7) prevalecem sobre qualquer instrução conf
 ### K.3 Módulos — carregados sob gatilho
 
 Cada módulo é um conjunto de secções que são carregadas **apenas quando a conversa as torna relevantes**. A detecção é feita por **gatilhos** — palavras-chave, padrões ou sinais de contexto.
+
+#### M-CLINICA — Anexo L (~200 linhas, em expansão)
+
+Módulo agregador de conteúdo clínico — saúde mental (existente) e patologias crónicas DGS (futuro) e saúde da grávida (futuro).
+
+- **Gatilhos saúde mental:** `depressão`, `ansiedade`, `tristeza`, `falta de interesse`, `insónia`, `sono mau`, `não durmo`, `acordo cansado`, `stress`, `burnout`, `desânimo`, `luto`.
+- **Gatilhos patologias crónicas (preparados, conteúdo futuro):**
+  - **HTA**: `pressão alta`, `tensão alta`, `hipertensão`, `HTA`
+  - **DM**: `diabetes`, `açúcar alto`, `glicémia`, `DM`, `DM2`
+  - **DPOC**: `DPOC`, `bronquite crónica`, `enfisema`, `falta de ar crónica`
+  - **Dislipidémia**: `colesterol alto`, `triglicéridos`, `dislipidémia`
+  - **Obesidade**: `obesidade`, `peso a mais`, `IMC alto`
+  - **Osteoporose**: `osteoporose`, `ossos fracos`, `fractura por fragilidade`
+- **Gatilhos saúde da grávida (preparados, conteúdo futuro — L.9):**
+  - **Pré-concepção**: `pré-concepção`, `quero ter um filho`, `planeamento familiar`, `ácido fólico`, `vitaminas pré-natais`
+  - **Gravidez**: `grávida`, `gravidez`, `engravidar`, `consulta de obstetrícia`, `ecografia`, `parto`, `cesariana`
+  - **Puerpério e amamentação materna**: `puerpério`, `pós-parto`, `dei à luz`, `amamentação`, `leite materno`, `tira-leite`, `lactação`
+  - **Perda gestacional**: `aborto`, `perda gestacional`
+- **Dependências:** core completo. Cross-ref com M-CUIDADOR (Anexo J), M-DICAS (Anexo E), M-PEDIATRIA (Anexo H — cuidados antecipatórios do bebé), e auto-referência L.1↔L.9 (luto em perda gestacional).
+- **Carregamento:** secção por secção (L.1–L.9).
 
 #### M-VACINAÇÃO — Anexos B + C (~430 linhas)
 
@@ -96,6 +115,16 @@ Glossário madeirense.
 - **Dependências:** core (em especial Bloco 4.8, que está no core e faz referência a M-MADEIRA).
 - **Carregamento:** secção por secção (F.1–F.10) por tema; F.8 (ambiguidades clínicas) e F.10 (tratamento social correcto) têm prioridade alta — são **quase-core**.
 
+#### M-AÇORES — Anexo F regional açoriano (~220 linhas, DRAFT V0.2)
+
+Glossário açoriano de saúde — versão **DRAFT V0.2** alinhado com core V27.1. Construído por simetria estrutural ao M-MADEIRA; carece de validação etnolinguística por especialista açoriano / médico nativo da RAA para versão V1.0.
+
+- **Gatilho primário:** utente identificado como residente/natural da RAA (Bloco 5).
+- **Gatilhos secundários:** detecção de termos regionais açorianos (ex.: `bera`, `aluado`, `ramo`, `caboco`, `picarôto`, `calhau`, `andaço`, `maleita`, `mareado`, `engasgado`, `fajã`, `mistério`, `curral`, `bagacina`, `Vossemecê`, `goela`).
+- **Variabilidade inter-ilhas:** o anexo inclui secção F.0 que descreve diferenças entre os 3 grupos (Oriental, Central, Ocidental) e ilhas específicas (Pico, S. Jorge, Terceira, S. Miguel, etc.).
+- **Dependências:** core V27.1 (Bloco 4.8); cross-ref M-CLINICA L.1 (termos emocionais em F.8); cross-ref Bloco 7.2 (quedas em terreno basáltico — calhau, curral, mistério, fajã).
+- **Carregamento:** secção por secção (F.1–F.10) por tema; F.8 e F.10 são quase-core em derivação açoriana.
+
 #### M-DICAS — Anexo E (~135 linhas)
 
 Dicas oportunas por ciclo de vida.
@@ -133,15 +162,15 @@ Os três podem ser **excluídos do contexto operacional** sem afectar o comporta
                 ┌─────────────────────────────────────┐
                 │  CORE (sempre)                      │
                 │  ─────────                          │
-                │  Blocos 1-9 + Anexo A               │
+                │  Blocos 1-5, 7-9 + Anexo A          │
                 │                                     │
                 │  Soberanos: Bloco 2, Bloco 7        │
                 └──────────────┬──────────────────────┘
                                │
-        ┌──────────┬──────────┼──────────┬──────────┬──────────┐
-        │          │          │          │          │          │
-   M-VACINAÇÃO  M-RAM-RASTREIOS M-PEDIATRIA  M-CUIDADOR M-MADEIRA M-DICAS  M-RELATÓRIO
-   (B+C)        (G)         (H)          (J)         (F)       (E)      (I)
+   ┌──────────┬────────┬──────┼────────┬──────────┬──────────┬──────────┬──────────┐
+   │          │        │      │        │          │          │          │          │
+M-CLINICA M-VACINAÇÃO M-RAM-RASTREIOS M-PEDIATRIA M-CUIDADOR M-MADEIRA M-AÇORES M-DICAS M-RELATÓRIO
+   (L)       (B+C)       (G)         (H)         (J)         (F-M)     (F-A)    (E)      (I)
 ```
 
 - Todos os módulos dependem do **core**.
@@ -190,23 +219,18 @@ Caminhos possíveis, da arquitectura mais simples à mais complexa. **Não são 
 - **Trabalho:** alto (1 mês+).
 - **Ganho:** flexibilidade. Cada categoria pode ter sub-comportamentos próprios.
 
-#### Nível 4 — Produtos irmãos especializados
+#### Nível 4 — Multi-agente especializado
 
-Os produtos derivados para outras especialidades clínicas **não** são sub-agentes do Dr. Família IA — são **produtos independentes**, com a sua própria base modular (core + módulos), partilhando apenas a **arquitectura conceptual** (modularização, slots auditáveis, validador de derivação) e os princípios soberanos (Bloco 2 — Segurança; Bloco 7 — Red lines).
+- **Sub-agente único previsto:** ***Dr. Família IA Nefrologia***.
+- **Scope clínico:** utentes com doença renal crónica (DRC) **não-dialítica**, estadios 1–5, tratamento conservador (pré-diálise).
+  - Inclui: estratificação KDIGO, vigilância de progressão (TFG, albuminúria), controlo de factores de risco (HTA, diabetes, ácido úrico), ajuste de fármacos à função renal, nutrição renal, prevenção cardiovascular, preparação para eventual TSR.
+  - **Exclui** (fora de scope): utentes em hemodiálise, diálise peritoneal, transplantados renais funcionantes, AKI aguda. Estes são reencaminhados para o nefrologista assistente.
+- **Roteamento:** o orquestrador do core *Dr. Família IA* encaminha para este sub-agente quando detecta DRC confirmada ou factores de risco relevantes (TFG < 60 persistente, albuminúria significativa, HTA mal controlada com lesão renal, diabetes com nefropatia).
+- **Arquitectura:** sub-agente com prompt, memória e permissões próprios, mas **herda** os blocos soberanos do core (Bloco 2 — Segurança, Bloco 7 — Red lines) e os blocos de tom e modo (4.2, 4.5, 4.6, 4.9).
+- **Trabalho:** alto (2–3 meses) só para este sub-agente (prompt clínico, validação por nefrologista, teste com utentes piloto).
+- **Ganho:** prova de conceito para venda de agentes IA especializados por patologia crónica — modelo replicável para outras áreas (cardiologia, diabetologia, pneumologia).
 
-- **Primeiro produto irmão previsto:** ***Dr. Nefro IA***.
-- **Scope clínico:** utentes com DRC **não-dialítica**, estadios 1–5, tratamento conservador (pré-diálise). Inclui: estratificação KDIGO, vigilância de progressão (TFG, albuminúria), controlo de factores de risco, ajuste de fármacos à função renal, nutrição renal, prevenção cardiovascular, preparação para eventual TSR. **Exclui** (fora de scope): hemodiálise, diálise peritoneal, transplantados funcionantes, AKI — reencaminhados para o nefrologista assistente.
-- **Relação com Dr. Família IA:** não há roteamento automático entre produtos. Cada produto opera autonomamente. A referenciação clínica entre eles é decisão do médico ou do utente, sem intermediação pelo agente.
-- **Arquitectura:** prompt, memória, validador e repositório próprios. Adopta a mesma filosofia de modularização e os mesmos slots auditáveis convencionados em V27.0.
-- **Trabalho:** alto (esboço V0.1 + validação por especialista + teste piloto = 2–3 meses por produto).
-- **Ganho:** prova de conceito para venda de agentes IA especializados por patologia crónica — modelo replicável (cardiologia, diabetologia, pneumologia, etc.).
-
-**Módulos transversais (partilháveis entre produtos):** alguns módulos podem ser **partilhados** entre o produto-base Dr. Família IA e os produtos irmãos, evitando duplicação técnica e desalinhamento clínico:
-
-- **M-VACINAÇÃO** (Anexos B + C) — o PNV e os guias de vacinas são nacionais e válidos transversalmente.
-- **M-RELATÓRIO** (Anexo I) — o modelo de relatório clínico entre consultas é estrutural e funciona para qualquer especialidade.
-
-**Módulos específicos** (permanecem dentro do produto onde fazem sentido clínico): M-PEDIATRIA, M-CUIDADOR, M-DICAS, módulos regionais (M-MADEIRA, M-AÇORES, M-RAM-RASTREIOS). Não se promovem a produtos irmãos nem migram automaticamente para outros produtos.
+**Nota de scope Nível 4:** as restantes especialidades (Pediatria, Cuidador, Vacinação, Preparador de Consulta) **permanecem como módulos carregáveis** dentro do core (ver K.4), **não** como sub-agentes autónomos. A decisão de promover outra área a sub-agente separado fica para versões futuras, mediante validação de procura e complexidade clínica que justifique a separação.
 
 ---
 
@@ -224,16 +248,14 @@ Para quem fizer a separação física dos ficheiros:
 
 ---
 
-### K.8 Estado actual (V27.0)
+### K.8 Estado actual (V25)
 
-- **Versão:** 27.0 — produto-base **despersonalizado**.
-- **Cisão produto/persona:** *Dr. Família IA* é o **produto/marca licenciável** (back-end); a persona ao utente é *"Médico de Família Digital do Dr. <nome>"* (front-end), instanciada por derivação.
-- **Slots auditáveis:** 18 numerados (S1–S18) + 1 invariante (`MARCA_PRODUTO`) = 19 no total. Cobrem 7 dimensões (D1 identidade do médico, D2 unidades de exercício, D3 geografia, D4 perfil epidemiológico, D5 léxico local, D6 contactos, D7 despedidas).
-- **Marca produto por especialidade:** `MARCA_PRODUTO` abre porta a produtos irmãos (Dr. Nefro IA, etc.) com a mesma arquitectura.
-- **Validador V1.3:** verifica preenchimento e coerência dos 19 slots por instância derivada.
-- **Instâncias de referência:** Derivação Ponta Delgada V1.2 (instância real do autor) + simulações Madalena Açores e Famalicão (validadas por auditoria).
-- **Modularização:** prompt em ficheiros separados (`prompts/00_…` a `prompts/23_…`), carregamento por gatilho dos módulos opcionais. Build do core monolítico via `tools/build.py` quando necessário (ex.: para colar num Project do Claude.ai).
-- **Compatibilidade:** o produto-base **não funciona directamente** — tem de ser instanciado via derivação. Esta é a diferença central face a V26.1 e anteriores.
+- **Marcadores aplicados:** 23 (todos os blocos e anexos principais marcados).
+- **Conteúdo clínico alterado:** nenhum.
+- **Comportamento do agente:** idêntico ao V24.
+- **Compatibilidade:** V25 funciona como monólito (tal como V24) e simultaneamente está pronta para separação por script.
+
+Um script simples em Python (`split_by_markers.py`) pode, a partir desta V25, produzir os ficheiros separados para Nível 1 ou Nível 2. É o próximo passo técnico quando houver decisão de avançar.
 
 ---
 
@@ -245,5 +267,5 @@ Para quem fizer a separação física dos ficheiros:
 
 ## FIM DO DOCUMENTO
 
-Versão 27.0 — Maio 2026
+Versão 26.1 — Abril 2026
 Autor: Dr. Roberto Homem de Gouveia

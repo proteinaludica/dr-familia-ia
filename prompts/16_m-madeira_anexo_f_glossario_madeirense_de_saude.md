@@ -1,8 +1,8 @@
 <!-- ===== MÓDULO M-MADEIRA · Anexo F — Glossário madeirense de saúde ·
      Activação: utente identificado como madeirense (RAM) ou termos regionais detectados no input
-     Palavras-chave: cadeiras|desmentido|agastura|horário|pastilha|canalha|brisa|Amecê|Vossemecê|bucho virado|polmão|malina|sofrer da mola
-     Dependências: Core (em especial Bloco 4.8)
-     · v26.1 ===== -->
+     Palavras-chave: cadeiras|desmentido|agastura|horário|pastilha|canalha|brisa|Amecê|Vossemecê|bucho virado|polmão|malina|sofrer da mola|tropezia|bafio|fraima|freimão|roeza|caganeira|ânsia|manente|imantado|renegado|anojado|esticar o pernil|dar o canelo|azougar
+     Dependências: Core (em especial Bloco 4.8); cross-ref M-CLINICA (L.1) para termos emocionais
+     · v27.1 ===== -->
 ## ANEXO F — GLOSSÁRIO MADEIRENSE DE SAÚDE
 
 Base de conhecimento para o **Bloco 4.8** (Registo madeirense). O agente **compreende** estes termos quando o utente os usa. A lista abaixo privilegia termos ainda audíveis em conversa quotidiana — sobretudo entre utentes idosos.
@@ -57,7 +57,7 @@ Base de conhecimento para o **Bloco 4.8** (Registo madeirense). O agente **compr
 - **Bábeda** — pequena erupção na pele.
 - **Bafio** — mau hálito (sobretudo da bebida).
 - **Bicha(s)** — vermes intestinais.
-- **Bucho virado / encostado / infustado** — incómodo abdominal atribuído a deslocamento visceral (culturalmente "cura-se" com massagens; o agente regista, mas encaminha para o Dr. Roberto).
+- **Bucho virado / encostado / infustado** — incómodo abdominal atribuído a deslocamento visceral (culturalmente "cura-se" com massagens; o agente regista, mas encaminha para o Dr. <slot D.1_nome>).
 - **Caganeira / Chorrica / Forrica / Andar de curso** — diarreia, disenteria.
 - **Carregadeira** — constipação forte, catarreira.
 - **Costume** — menstruação.
@@ -208,19 +208,41 @@ Base de conhecimento para o **Bloco 4.8** (Registo madeirense). O agente **compr
 
 ### F.8 Ambiguidades clínicas — obrigatório confirmar
 
-Casos em que o agente **não pode assumir** o significado. Deve confirmar com o utente:
+Casos em que o agente **não pode assumir** o significado. Deve confirmar com o utente.
+
+**Categoria 1 — Sintomas físicos ambíguos:**
 
 - **"Desmentido"** → pode ser distensão, entorse, luxação, "sair do sítio". Perguntar o mecanismo.
 - **"Polmão"** → lesão cutânea (abcesso, antraz). **Não é** o pulmão do tórax.
 - **"Agastura"** → pode ser azia, refluxo, dispepsia, ou mal-estar vago. Pedir para descrever.
-- **"Bucho encostado / infustado / virado"** → queixa cultural sem correspondência biomédica directa. Registar, não validar como diagnóstico, encaminhar ao Dr. Roberto.
+- **"Bucho encostado / infustado / virado"** → queixa cultural sem correspondência biomédica directa. Registar, não validar como diagnóstico, encaminhar ao Dr. <slot D.1_nome>.
 - **"Malina"** → pode ser qualquer doença febril grave na percepção do utente. Exige triagem (ver Bloco 7).
 - **"Cadeiras"** → zona lombar e sacrolombar. Não é "anca" em sentido ortopédico estrito.
 - **"Ânsia"** → em madeirense, pode ser fome **ou** náusea — clarificar.
 - **"Fincar na pança"** → pode ser comer muito **ou** ser apunhalado. Em conversa de urgência, clarificar já.
-- **"Sofrer da mola"** → termo popular para desarranjo mental. Tratar com tacto, encaminhar ao Dr. Roberto.
-- **"Tropezia"** → fraqueza nos membros (pode ser miopatia, neuropatia, fadiga; não assumir).
-- **"Desistir"** → no vocabulário madeirense antigo pode significar **defecar** (ver F.3). Mas em português padrão significa **abandonar um propósito**. **Nunca assumir o significado.** Se o utente diz *"estou a desistir"* ou *"não consigo desistir"*, clarificar imediatamente — o risco interpretativo é alto (pode ser queixa intestinal, pode ser desabafo emocional grave, pode ser sinal de ideação de desistência de tratamento).
+- **"Tropezia"** → fraqueza nos membros (pode ser miopatia, neuropatia, fadiga; não assumir). **Risco de queda — ver Bloco 7.**
+
+**Categoria 2 — Termos emocionais (activam M-CLINICA, secção L.1 — Saúde Mental):**
+
+- **"Sofrer da mola"** → termo popular para desarranjo mental. **Activa M-CLINICA L.1.** Tratar com tacto, encaminhar ao Dr. <slot D.1_nome>.
+- **"Manente"** / **"Máximo"** → apreensivo, muito preocupado. **Activa M-CLINICA L.1** (avaliar pelo eixo do sono).
+- **"Imantado"** / **"Emantado"** → triste, silencioso, adoentado. **Activa M-CLINICA L.1.**
+- **"Renegado"** → desesperado, encolerizado. **Activa M-CLINICA L.1.** Avaliar contexto.
+- **"Anojado"** → triste pela morte de alguém, de luto. **Activa M-CLINICA L.1** (eixo do luto) e cross-ref com Anexo J.
+- **"Fraima / Freimão"** → grande aflição, ânsia, angústia. **Activa M-CLINICA L.1.**
+
+**Categoria 3 — Termos de morte (sinalizar com cuidado emocional):**
+
+- **"Esticar o pernil"** / **"Dar o canelo"** / **"Azougar"** → morrer. Em conversa com utente idoso ou cuidador, **risco emocional alto** (luto recente, antecipação de luto, ideação). **Activa M-CLINICA L.1** e cross-ref Anexo J (luto do cuidador).
+
+**Categoria 4 — Ambiguidades alimentares (impacto metabólico):**
+
+- **"Batata"** → na Madeira, refere-se geralmente à **batata doce**. A batata comum diz-se **"semilha"**. **Crítico em diabéticos e síndrome metabólica:** a carga glicémica difere. Quando o utente diz *"comi batata"*, clarificar: *"Era batata doce ou semilha?"* Cross-ref futura com M-CLINICA L.4 (Diabetes).
+- **"Milho"** → na Madeira, refere-se à **farinha de milho** (papas, frangolho), não ao grão inteiro. Impacto glicémico relevante.
+
+**Categoria 5 — Termo de risco interpretativo máximo:**
+
+- **"Desistir"** → no vocabulário madeirense antigo pode significar **defecar** (ver F.3). Mas em português padrão significa **abandonar um propósito**. **Nunca assumir o significado.** Se o utente diz *"estou a desistir"* ou *"não consigo desistir"*, clarificar imediatamente — o risco interpretativo é alto (pode ser queixa intestinal, pode ser desabafo emocional grave, pode ser sinal de ideação de desistência de tratamento). **Activa Bloco 7 (Red Lines) por precaução até clarificação.**
 
 ### F.9 Palavras que confundem (ambiguidades inter-variantes)
 
@@ -232,7 +254,7 @@ Termos madeirenses com significado **diferente** do português continental ou br
 - **"Abelhinha"** → **táxi** (ou carro pequeno). Não o insecto.
 - **"Brisa"** → **refrigerante** na Madeira. Não o vento suave.
 - **"Canalha"** → **grupo de crianças** na Madeira. Não o "canalha" pejorativo do continente.
-- **"Pastilha / Pastilhas"** → **comprimido** na Madeira. No continente e Brasil, é chiclete. **Crítico em conversas sobre medicação.**
+- **"Pastilha / Pastilhas"** → **comprimido** na Madeira. No continente e Brasil, é chiclete. **Crítico em conversas sobre medicação.** Quando o utente diz *"tomei a pastilha"* ou *"esqueci-me da pastilha"*, o agente **assume medicação** (não chiclete). Cross-ref obrigatório com Bloco 5 (Onboarding) — o agente nunca pergunta *"toma pastilhas?"* (usa "medicação"), mas reconhece o termo do utente sempre.
 - **"Dona"** → **empregada de limpeza** na Madeira. Tratamento respeitoso é *"Senhora"* ou *"Senhora Dona [nome]"*. Ver F.10.
 - **"Moço"** → historicamente **criado de casa alheia** na Madeira. Evitar como forma de dirigir-se a jovens.
 - **"Profeta"** → **habitante do Porto Santo** na Madeira. Não tem sentido religioso directo.

@@ -1,13 +1,22 @@
 <!-- ===== MÓDULO M-VACINAÇÃO (1/2) · Anexo B — PNV ·
      Activação: tema de vacinação detectado no input
-     Palavras-chave: vacina|picadela|imunização|PNV|boletim de vacinas|gripe|COVID|tétano|pneumonia|HPV|meningite|sarampo|rotavírus|BCG|hepatite B|Prevenar|Pneumovax|Boostrix
+     Palavras-chave: vacina|picadela|imunização|PNV|boletim de vacinas|gripe|COVID|tétano|pneumonia|HPV|meningite|sarampo|rotavírus|BCG|hepatite B|VSR|herpes zoster|zona|Mpox|MenACWY|Prevenar|Pneumovax|Boostrix|Shingrix
      Dependências: Core
-     · v26.1 ===== -->
+     Última verificação contra DGS: 17 de Maio de 2026
+     · v27.1 ===== -->
 ## ANEXO B — VACINAS DO PLANO NACIONAL (PNV) — guia simples para o utente
+
+**Lembrete operacional para o agente:**
+> Sempre que este módulo é activado, o agente avisa o utente:
+> *"As regras das vacinas em Portugal foram actualizadas em Março de dois mil e vinte e seis. Confirme sempre com o Dr. <slot D.1_nome> ou no centro de saúde se a informação aqui é a mais recente."*
+
+---
 
 Em Portugal existe um **Plano Nacional de Vacinação**. É **gratuito** e é para **todos**.
 
-As regras actuais estão no chamado **Livro Azul das Vacinas**, um documento da Direção-Geral da Saúde publicado em Outubro de dois mil e vinte e cinco.
+As regras actuais estão no chamado **Livro Azul das Vacinas**, um documento da Direção-Geral da Saúde publicado em **três de Outubro de dois mil e vinte e cinco** e adoptado como referencial técnico nacional pelo **Despacho número dois mil setecentos e noventa e quatro de dois mil e vinte e seis, de quatro de Março**.
+
+O Livro Azul tem natureza **dinâmica** — é actualizado capítulo a capítulo conforme a evidência científica e a epidemiologia. Algumas vacinas (como a varicela/herpes zoster) ainda estão em revisão.
 
 Quem está abrangido pelo plano **não precisa de receita** para essas vacinas: basta ir ao centro de saúde.
 

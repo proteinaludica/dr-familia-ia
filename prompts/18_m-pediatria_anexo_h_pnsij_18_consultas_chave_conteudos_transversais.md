@@ -2,21 +2,21 @@
      Activação: utente <18 anos OU temas pediátricos/maternos detectados no input
      Palavras-chave: criança|bebé|filho|filha|neto|neta|grávida|amamentação|cólicas|desenvolvimento|vacinas infantis|berço|fralda|diversificação|adolescente|menstruação|puberdade|escolaridade|HEEADSSS|autismo|M-CHAT|cadeirinha|cheque-dentista
      Sub-secções: H.0 sempre; H.1–H.18 pela idade; H.19–H.27 por tema (~970 linhas — carregar selectivamente se possível)
-     Dependências: Core; cross-ref M-VACINAÇÃO e M-RASTREIOS
-     · v26.1 ===== -->
+     Dependências: Core; cross-ref M-VACINAÇÃO e M-RAM-RASTREIOS
+     · v27.0 ===== -->
 ## ANEXO H — PLANO DE CONSULTAS DA CRIANÇA (PNSIJ) — guia simples para o utente
 
 Este anexo é o **guia de vigilância da saúde das crianças e adolescentes**, dos zero aos dezoito anos, em registo de utente.
 
 Base: **Norma DGS 010/2013 de 31 de Maio de 2013** — *Programa Nacional de Saúde Infantil e Juvenil (PNSIJ)*. Está em vigor desde **1 de Junho de 2013** e nunca foi revogada nem actualizada.
 
-Na Madeira, o PNSIJ nacional aplica-se integralmente. As adaptações regionais (rastreio da saúde visual infantil, rastreio da retinopatia diabética em adolescentes diabéticos) estão no **Anexo G**.
+Em <slot D.3_regiao>, o PNSIJ nacional aplica-se integralmente. As adaptações regionais (conforme Anexo G regional — rastreio da saúde visual infantil, rastreio da retinopatia diabética em adolescentes diabéticos) estão no **Anexo G**.
 
 ---
 
 ### H.0 Como funciona o plano
 
-O PNSIJ marca **consultas-chave** nas idades em que mais muda no crescimento e no desenvolvimento da criança. Nessas consultas, o Dr. Roberto ou a enfermeira avaliam:
+O PNSIJ marca **consultas-chave** nas idades em que mais muda no crescimento e no desenvolvimento da criança. Nessas consultas, o Dr. <slot D.1_nome> ou a enfermeira avaliam:
 
 - Peso, altura, perímetro da cabeça (nos primeiros dois anos).
 - Visão, audição e linguagem.
@@ -172,7 +172,7 @@ Reforço da vacina das seis doenças. Reforço da meningite B.
 Mais um reforço da vacina das seis doenças.
 
 **Cuidados antecipatórios:**
-- **Início da diversificação alimentar.** Sopinha de legumes, fruta raspada, papa. Uma coisa de cada vez, para ver se não dá alergia. O Dr. Roberto dá indicações detalhadas.
+- **Início da diversificação alimentar.** Sopinha de legumes, fruta raspada, papa. Uma coisa de cada vez, para ver se não dá alergia. O Dr. <slot D.1_nome> dá indicações detalhadas.
 - **Saúde oral:** se já nasceram dentes, limpar com pano húmido ou dedeira.
 - Dar liberdade para explorar, com segurança.
 - Ler livrinhos de cores.
@@ -239,7 +239,7 @@ Reforço da vacina da pneumonia. Reforço da meningite B. Primeira dose do saram
 
 **Cuidados antecipatórios:**
 - **Paragem da vitamina D** aos 12 meses (terminou o primeiro ano).
-- **Leite** passa a poder ser leite de vaca (o Dr. Roberto orienta).
+- **Leite** passa a poder ser leite de vaca (o Dr. <slot D.1_nome> orienta).
 - **Regras e limites** começam cedo. Firme e terno no "não".
 - **Birras** podem aparecer. Reagir com calma e firmeza.
 - Estimular a linguagem — palavras, canções, livros.
@@ -267,7 +267,7 @@ Reforço da vacina da pneumonia. Reforço da meningite B. Primeira dose do saram
 - Aponta para partes do corpo quando nomeadas.
 
 **Vacinas aos 15 meses (PNV):**
-Não há vacinas do PNV obrigatórias a esta idade. Existe a vacina da varicela como extra-PNV — não é feita a todas as crianças. A decisão é do Dr. Roberto.
+Não há vacinas do PNV obrigatórias a esta idade. Existe a vacina da varicela como extra-PNV — não é feita a todas as crianças. A decisão é do Dr. <slot D.1_nome>.
 
 **Cuidados antecipatórios:**
 - Introdução gradual a rotinas (refeição, banho, sono).
@@ -529,7 +529,7 @@ Nenhuma vacina do PNV nesta idade (a última foi aos cinco anos). Vacina da grip
 Nenhuma do PNV. Vacina da gripe anual para crianças de risco.
 
 **Cuidados antecipatórios:**
-- **Rastreio de dislipidémias** se houver história familiar — o Dr. Roberto avalia se há indicação para análises ao colesterol (ver Anexo D e H.19).
+- **Rastreio de dislipidémias** se houver história familiar — o Dr. <slot D.1_nome> avalia se há indicação para análises ao colesterol (ver Anexo D e H.19).
 - Actividade física diária.
 - Higiene oral — duas vezes por dia, com fio dentário.
 - Ainda não entregam cheque-dentista aos 8 anos (são nos 7, 10 e 13) — mas consultas regulares no dentista continuam.
@@ -639,7 +639,7 @@ Se a vacina HPV não foi feita aos dez anos, é feita aqui. Nenhuma outra vacina
 - Desempenho escolar, projecto de vida.
 
 **Vacinas aos 15–18 anos:**
-Se alguma vacina do PNV em atraso, fazer aqui. Em casos específicos, o Dr. Roberto pode propor reforço de meningite ACWY (extra-PNV — decisão individual).
+Se alguma vacina do PNV em atraso, fazer aqui. Em casos específicos, o Dr. <slot D.1_nome> pode propor reforço de meningite ACWY (extra-PNV — decisão individual).
 
 **Cuidados antecipatórios:**
 - **Cheque-dentista aos 15–16 anos** (PNPSO — ver H.21).
@@ -664,7 +664,7 @@ Se alguma vacina do PNV em atraso, fazer aqui. Em casos específicos, o Dr. Robe
 
 ### H.19 Curvas de crescimento, rastreios de visão, audição e dislipidémias
 
-O Dr. Roberto usa as **curvas da Organização Mundial de Saúde** (WHO Child Growth Standards) em todas as consultas:
+O Dr. <slot D.1_nome> usa as **curvas da Organização Mundial de Saúde** (WHO Child Growth Standards) em todas as consultas:
 - **Peso para a idade.**
 - **Comprimento/altura para a idade.**
 - **Perímetro da cabeça para a idade** (até aos dois anos).
@@ -729,7 +729,7 @@ O Dr. Roberto usa as **curvas da Organização Mundial de Saúde** (WHO Child Gr
 - Assento elevatório sem encosto (só na ausência de alternativa — **com encosto é mais seguro**).
 - Até aos **150 cm de altura**.
 
-**Regras práticas que o Dr. Roberto reforça:**
+**Regras práticas que o Dr. <slot D.1_nome> reforça:**
 - **Nunca** ao colo.
 - **Nunca** com o cinto do adulto a passar pelo pescoço.
 - Cadeirinha sempre bem fixa (preferir sistema ISOFIX quando disponível).
@@ -778,7 +778,7 @@ O Dr. Roberto usa as **curvas da Organização Mundial de Saúde** (WHO Child Gr
 - **Hipertensão estádio 1** — tensão entre o **P95 e o P99 + 5 mmHg**.
 - **Hipertensão estádio 2** — tensão **superior ao P99 + 5 mmHg**.
 
-**O que o Dr. Roberto faz:**
+**O que o Dr. <slot D.1_nome> faz:**
 - Valores acima do P90 — repetir em duas a três consultas separadas antes de diagnosticar.
 - Valores acima do P95 confirmados — investigar causa (renal, cardíaca, endócrina) e referenciar se necessário.
 - Criança com obesidade + tensão alta — risco elevado de doença cardiovascular futura; intervenção no estilo de vida.
@@ -794,7 +794,7 @@ O Dr. Roberto usa as **curvas da Organização Mundial de Saúde** (WHO Child Gr
 
 **Puberdade — estádios de Tanner:**
 
-A puberdade desenvolve-se em cinco estádios (T1 a T5). O Dr. Roberto avalia em todas as consultas a partir dos 10 anos.
+A puberdade desenvolve-se em cinco estádios (T1 a T5). O Dr. <slot D.1_nome> avalia em todas as consultas a partir dos 10 anos.
 
 **Nas raparigas:**
 - **Primeiro sinal** — botão mamário (telarca) — por volta dos 10–11 anos (normal entre os 8 e os 13).
@@ -833,7 +833,7 @@ Consulta em **privacidade** (pelo menos parte) a partir dos 12–13 anos. Explic
 
 **S — Safety (Segurança)** — Violência em casa, bullying, violência no namoro, segurança rodoviária (cinto, capacete, álcool e condução).
 
-**Como o Dr. Roberto conduz:**
+**Como o Dr. <slot D.1_nome> conduz:**
 - Começar por temas menos sensíveis (casa, escola) e avançar para os mais sensíveis.
 - Perguntas abertas.
 - Não julgar. Não moralizar.
@@ -865,7 +865,7 @@ Conjunto organizado de medidas integradas (saúde, segurança social, educação
 - ELI faz avaliação multidisciplinar e elabora **Plano Individual de Intervenção Precoce** (PIIP).
 - Apoio **em casa, na creche ou jardim-de-infância** — não deslocar a criança.
 
-**O Dr. Roberto:**
+**O Dr. <slot D.1_nome>:**
 - Identifica precocemente (o atraso quanto mais cedo for intervencionado, melhores os resultados).
 - Conversa com a família com linguagem directa e empática.
 - Referencia formalmente. Acompanha o plano.
@@ -928,7 +928,7 @@ Conjunto organizado de medidas integradas (saúde, segurança social, educação
 
 ### H.26 Idades óptimas para cirurgias pediátricas não urgentes
 
-Lista orientadora (Norma DGS 010/2013) — o Dr. Roberto confirma com o cirurgião pediátrico.
+Lista orientadora (Norma DGS 010/2013) — o Dr. <slot D.1_nome> confirma com o cirurgião pediátrico.
 
 - **Quisto da cauda da sobrancelha (quisto dermóide)** — após os seis meses.
 - **Fenda do lábio** — por volta dos dois a três meses.
@@ -960,7 +960,7 @@ Lista orientadora (Norma DGS 010/2013) — o Dr. Roberto confirma com o cirurgi�
 
 **Não faz:**
 - Não substitui a consulta médica presencial.
-- Não interpreta análises, exames ou relatórios — cabe ao Dr. Roberto ou ao pediatra.
+- Não interpreta análises, exames ou relatórios — cabe ao Dr. <slot D.1_nome> ou ao pediatra.
 - Não faz diagnóstico clínico autónomo.
 - Não prescreve medicamentos.
 - Não faz rastreios validados (M-CHAT, Escala Mary Sheridan) — identifica indicação e encaminha.

@@ -1,14 +1,15 @@
 <!-- ===== MÓDULO M-VACINAÇÃO (2/2) · Anexo C — Guias detalhados (FAQ por vacina) ·
      Activação: co-carregado com Anexo B (mesmo gatilho de M-VACINAÇÃO)
      Dependências: Core
-     · v26.1 ===== -->
+     Última verificação contra DGS: 17 de Maio de 2026
+     · v27.1 ===== -->
 ## ANEXO C — GUIAS DETALHADOS POR VACINA (PNV e extra-PNV)
 
 Neste anexo, cada vacina importante tem o seu **guia em registo de utente**: o que é, porquê fazer, quem deve fazer, quando, onde, perguntas frequentes.
 
 Algumas destas vacinas estão **dentro do PNV** para certos grupos (gripe, COVID, HPV). Outras são **extra-PNV** — compradas com receita na farmácia, em alguns casos com desconto. O que varia entre secções é a cobertura e o custo.
 
-A maior parte destas vacinas precisa de **receita do Dr. Roberto** (a excepção são as do PNV gratuitas no centro de saúde para os grupos abrangidos).
+A maior parte destas vacinas precisa de **receita do Dr. <slot D.1_nome>** (a excepção são as do PNV gratuitas no centro de saúde para os grupos abrangidos).
 
 O agente explica. O agente nunca prescreve.
 
@@ -102,7 +103,7 @@ Comprada na farmácia, com receita. **Não é gratuita** (à data desta versão)
 **Pergunta frequente**
 
 *"Vale a pena? É caro."*
-É uma decisão para falar com o Dr. Roberto. Quem tem doença dos pulmões, coração ou rins costuma ter benefício claro.
+É uma decisão para falar com o Dr. <slot D.1_nome>. Quem tem doença dos pulmões, coração ou rins costuma ter benefício claro.
 
 ---
 
@@ -139,7 +140,7 @@ Quase toda a gente nascida antes dos anos 90 teve varicela na infância, muitas 
 Secção escrita em **registo directo para o utente**, em frases curtas.
 O agente lê esta secção e transmite ao utente no mesmo tom. Não copiar tabelas densas. Não usar siglas.
 
-**Importante:** o agente **nunca prescreve** vacinas. A receita é sempre do Dr. Roberto.
+**Importante:** o agente **nunca prescreve** vacinas. A receita é sempre do Dr. <slot D.1_nome>.
 
 ---
 
@@ -175,7 +176,7 @@ Desde Janeiro de 2025, a vacina é gratuita para quem tem uma destas situações
 - Infeção por VIH.
 - Tratamento com medicamentos que baixam as defesas (por exemplo, quimioterapia).
 
-Em qualquer destes casos, falar com o Dr. Roberto. Ele passa a receita.
+Em qualquer destes casos, falar com o Dr. <slot D.1_nome>. Ele passa a receita.
 
 ---
 
@@ -201,7 +202,7 @@ Depende do que já fez:
 - Se já tomou a Pneumovax 23 → pode faltar a Prevenar 20.
 - Se já fez as duas no passado → normalmente basta uma dose da Prevenar 20 anos depois.
 
-Em todos os casos, o Dr. Roberto decide. Trazer o boletim de vacinas à consulta ajuda muito.
+Em todos os casos, o Dr. <slot D.1_nome> decide. Trazer o boletim de vacinas à consulta ajuda muito.
 
 ---
 
@@ -235,7 +236,7 @@ Feito o esquema certo, dura muitos anos. Reforços são raros e só em casos esp
 Sim, vale ainda mais. Quem já teve pneumonia no passado tem **mais** razão para vacinar, não menos.
 
 *"Tenho diabetes. Devia fazer?"*
-É recomendada. Com receita, a farmácia desconta. Vale a pena falar com o Dr. Roberto.
+É recomendada. Com receita, a farmácia desconta. Vale a pena falar com o Dr. <slot D.1_nome>.
 
 *"Tenho doença dos rins. E agora?"*
 Nesse caso a vacina é **gratuita** no centro de saúde. É um dos grupos mais importantes para proteger.
@@ -247,7 +248,7 @@ Nesse caso a vacina é **gratuita** no centro de saúde. É um dos grupos mais i
 - Não receita a vacina.
 - Não diz "tome esta dose nesse dia". Isso é trabalho do médico.
 - Não promete que é gratuito sem ver a situação concreta. Diz apenas se a condição **poderá** estar na lista da gratuitidade.
-- Encaminha sempre a decisão final para a próxima consulta com o Dr. Roberto.
+- Encaminha sempre a decisão final para a próxima consulta com o Dr. <slot D.1_nome>.
 
 ---
 
@@ -354,7 +355,7 @@ Centro de saúde, no âmbito do Plano Nacional de Vacinação. Quem não for abr
 **Perguntas frequentes**
 
 *"Já tenho vinte e três anos e sou mulher. Posso?"*
-Sim. Pode fazer no centro de saúde, de graça. Basta falar com o Dr. Roberto para a receita e marcar.
+Sim. Pode fazer no centro de saúde, de graça. Basta falar com o Dr. <slot D.1_nome> para a receita e marcar.
 
 *"Sou homem, tenho vinte anos. E eu?"*
 Para já, a gratuitidade abrange os nascidos em dois mil a dois mil e dois. Se nasceu depois, vai ser abrangido nos próximos anos. Entretanto, pode sempre comprar na farmácia com receita.

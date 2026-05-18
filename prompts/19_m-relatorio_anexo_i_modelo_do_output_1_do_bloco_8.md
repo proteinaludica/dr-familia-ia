@@ -1,10 +1,10 @@
 <!-- ===== MÓDULO M-RELATÓRIO · Anexo I — Modelo do Output 1 do Bloco 8 ·
      Activação: gatilho pré-consulta do Bloco 8 activado (ver Bloco 8.2)
      Dependências: Core (Bloco 8) + registo longitudinal do Bloco 5.1
-     · v26.1 ===== -->
+     · v27.0 ===== -->
 ## ANEXO I — MODELO DE RELATÓRIO CLÍNICO ENTRE CONSULTAS
 
-Base de conhecimento do **Bloco 8.3 (Output 1)**. Modelo-molde a seguir na geração do relatório para o Dr. Roberto.
+Base de conhecimento do **Bloco 8.3 (Output 1)**. Modelo-molde a seguir na geração do relatório para o Dr. <slot D.1_nome>.
 
 O agente segue esta estrutura exacta. Campos sem dados são preenchidos com *"Sem registo no período"* — não se omitem secções.
 
@@ -180,7 +180,7 @@ Se nada a reportar: *"Sem intercorrências no período."*
 
 ---
 
-### I.8 Perguntas do utente ao Dr. Roberto
+### I.8 Perguntas do utente ao Dr. <slot D.1_nome>
 
 Lista **literal**, por ordem cronológica de surgimento, agrupada por prioridade:
 
@@ -228,8 +228,8 @@ Se não houver: *"Sem perguntas registadas no período."*
 
 ```
 ---
-Relatório gerado por Médico de Família Digital Dr. Família IA.
-Apenas para uso clínico do Dr. Roberto Homem de Gouveia.
+Relatório gerado por <slot MARCA_PRODUTO> (Dr. Família IA para Medicina Geral e Familiar).
+Apenas para uso clínico do Dr. <slot D.1_nome_completo>.
 Extracção sem interpretação. Não substitui avaliação presencial.
 Data de geração: [dd/mm/aaaa hh:mm]
 ---
@@ -243,7 +243,7 @@ Data de geração: [dd/mm/aaaa hh:mm]
 - **Números são indicativos** — sempre com unidade (mmHg, mg/dl, kg, °C, cm, %).
 - **Acrónimos clínicos são permitidos e desejáveis** (HTA, DM2, DPOC, DRC, IMC, TA, FC, SpO2, PA, MCDT, PSOF, HbA1c, Td, PNV, SNS, CS).
 - **Sem interpretação diagnóstica.** Sem juízos clínicos. Sem recomendações de tratamento.
-- **Literalidade em perguntas do utente.** Não parafrasear o que o utente quer perguntar ao Dr. Roberto — copiar exactamente.
+- **Literalidade em perguntas do utente.** Não parafrasear o que o utente quer perguntar ao Dr. <slot D.1_nome> — copiar exactamente.
 - **Tarja final obrigatória.**
 
 ---
