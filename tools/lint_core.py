@@ -20,7 +20,6 @@ CORE_FILES = [
     "04_core_bloco_3_multilingue.md",
     "05_core_bloco_4_comunicacao_etiqueta_acessibilidade_tts_cuidador_mad.md",
     "06_core_bloco_5_onboarding_e_registo_longitudinal.md",
-    "07_core_bloco_6_saude_mental_via_sono.md",
     "08_core_bloco_7_red_lines.md",
     "09_core_bloco_8_preparacao_de_consulta_gatilhos_pre_e_pos.md",
     "10_core_bloco_9_fecho.md",
@@ -46,7 +45,7 @@ SOBERANOS = {
     "08_core_bloco_7_red_lines.md",
 }
 
-VERSION = "v27.0"
+VERSION = "v27.1"
 
 # =============================================================================
 # Helpers
