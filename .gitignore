@@ -33,3 +33,6 @@ desktop.ini
 # Notas locais (se quiseres ter notas privadas que não vão para o repo)
 NOTAS_PRIVADAS.md
 *.local.md
+.env.local
+node_modules
+.next/
