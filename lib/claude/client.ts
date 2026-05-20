@@ -37,7 +37,7 @@ export async function* callClaudeWithCacheStreaming(
     const stream = await client.messages.stream({
       model: "claude-sonnet-4-20250514",
       max_tokens: 1024,
-      system: systemMessages as Parameters<typeof client.messages.stream>[0]["system"],
+      system: systemMessages as unknown as Parameters<typeof client.messages.stream>[0]["system"],
       messages: [{ role: "user", content: userMessage }],
     });
 
@@ -50,7 +50,7 @@ export async function* callClaudeWithCacheStreaming(
       }
     }
 
-    const usage = stream.finalMessage?.usage;
+    const usage = (await stream.finalMessage())?.usage;
     yield {
       type: "cache_metrics",
       cacheMetrics: {
