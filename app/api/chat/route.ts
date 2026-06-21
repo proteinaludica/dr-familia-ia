@@ -48,6 +48,12 @@ export async function POST(request: NextRequest) {
                 cacheMetrics: chunk.cacheMetrics,
               })}\n\n`;
               controller.enqueue(encoder.encode(data));
+            } else if (chunk.type === "chips") {
+              const data = `data: ${JSON.stringify({
+                type: "chips",
+                chips: chunk.chips,
+              })}\n\n`;
+              controller.enqueue(encoder.encode(data));
             } else if (chunk.type === "error") {
               const data = `data: ${JSON.stringify({
                 type: "error",

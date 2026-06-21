@@ -15,36 +15,63 @@ interface CacheMetrics {
   outputTokens: number;
 }
 
+// Brand teal used for active/follow-up chips.
+const BRAND_TEAL = "#2C7A7B";
+
+// Static starter chips shown before any message exists. Provisional copy —
+// edit these strings here. Keyed by tier.
+const STARTER_CHIPS: Record<"free" | "paid", string[]> = {
+  free: [
+    "Quero ver as minhas análises",
+    "Que rastreios devo fazer?",
+    "Tenho uma dúvida sobre a minha medicação",
+  ],
+  paid: [
+    "Quero ver as minhas análises",
+    "Que rastreios devo fazer?",
+    "Tenho uma dúvida sobre a minha medicação",
+    "Vacinas do meu filho",
+    "Preciso de ajuda como cuidador",
+  ],
+};
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [tier, setTier] = useState<"free" | "paid">("free");
   const [cacheMetrics, setCacheMetrics] = useState<CacheMetrics | null>(null);
+  // Dynamic follow-up chips delivered via the SSE "chips" event.
+  const [dynamicChips, setDynamicChips] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  // Sends a message through the same path the text input uses. Accepts the raw
+  // text so both the form and the suggestion chips can call it identically.
+  const sendMessage = async (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || loading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: input,
+      content: trimmed,
     };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    // Clear dynamic chips as soon as the user sends; they only reappear when
+    // the next "chips" event arrives.
+    setDynamicChips([]);
     setLoading(true);
 
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userMessage: input, tier }),
+        body: JSON.stringify({ userMessage: trimmed, tier }),
       });
 
       if (!response.ok) throw new Error(`API error: ${response.status}`);
@@ -87,6 +114,9 @@ export default function ChatPage() {
                 });
               } else if (parsed.type === "cache_metrics") {
                 setCacheMetrics(parsed.cacheMetrics);
+              } else if (parsed.type === "chips") {
+                // Follow-up suggestions for the answer just rendered.
+                setDynamicChips(Array.isArray(parsed.chips) ? parsed.chips : []);
               }
             } catch (e) {}
           }
@@ -105,6 +135,26 @@ export default function ChatPage() {
       setLoading(false);
     }
   };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
+
+  // Shared pill-button style for both starter and dynamic chips.
+  const chipStyle: React.CSSProperties = {
+    padding: "0.5rem 1rem",
+    borderRadius: "999px",
+    border: `1px solid ${BRAND_TEAL}`,
+    backgroundColor: "white",
+    color: BRAND_TEAL,
+    fontSize: "14px",
+    cursor: loading ? "not-allowed" : "pointer",
+    opacity: loading ? 0.6 : 1,
+    lineHeight: 1.3,
+  };
+
+  const starterChips = STARTER_CHIPS[tier];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", backgroundColor: "#f5f5f5" }}>
@@ -137,6 +187,28 @@ export default function ChatPage() {
         {messages.length === 0 && (
           <div style={{ textAlign: "center", color: "#999", marginTop: "2rem" }}>
             <p>Escreve uma mensagem para começar</p>
+            {/* Static starter chips, shown only before the first message. */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                justifyContent: "center",
+                marginTop: "1.5rem",
+              }}
+            >
+              {starterChips.map((chip) => (
+                <button
+                  key={chip}
+                  type="button"
+                  disabled={loading}
+                  onClick={() => sendMessage(chip)}
+                  style={chipStyle}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         {messages.map((msg) => (
@@ -153,11 +225,27 @@ export default function ChatPage() {
             </div>
           </div>
         ))}
+        {/* Dynamic follow-up chips, rendered under the last assistant reply. */}
+        {!loading && dynamicChips.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "flex-start" }}>
+            {dynamicChips.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                disabled={loading}
+                onClick={() => sendMessage(chip)}
+                style={chipStyle}
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+        )}
         {loading && <div>...</div>}
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSendMessage} style={{ padding: "1rem", borderTop: "1px solid #ddd", display: "flex", gap: "0.5rem" }}>
+      <form onSubmit={handleSubmit} style={{ padding: "1rem", borderTop: "1px solid #ddd", display: "flex", gap: "0.5rem" }}>
         <input
           type="text"
           value={input}
