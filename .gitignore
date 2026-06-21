@@ -36,3 +36,6 @@ NOTAS_PRIVADAS.md
 .env.local
 node_modules
 .next/
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
