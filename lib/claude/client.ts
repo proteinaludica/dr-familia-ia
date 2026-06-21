@@ -4,7 +4,11 @@
  */
 
 import Anthropic from "@anthropic-ai/sdk";
-import { loadSystemPromptWithCache, TierType } from "./prompt-loader";
+import {
+  loadSystemPromptWithCache,
+  TierType,
+  FallbackResolver,
+} from "./prompt-loader";
 
 let anthropicClient: Anthropic | null = null;
 
@@ -26,10 +30,17 @@ export async function* callClaudeWithCacheStreaming(
   userRegistryText?: string
 ) {
   const client = getAnthropicClient();
-  const systemPrompt = loadSystemPromptWithCache(tier, userName, userRegistryText);
+  const systemPrompt = await loadSystemPromptWithCache(tier, userMessage, {
+    userName,
+    userRegistryText,
+    fallbackResolver: makeHaikuFallbackResolver(client),
+  });
 
+  // Order matters for prompt caching: fixed core first (stable prefix), then
+  // the conditional modules block (varies), then user context (uncached).
   const systemMessages = [
     systemPrompt.coreBlock,
+    ...(systemPrompt.modulesBlock ? [systemPrompt.modulesBlock] : []),
     systemPrompt.userContextBlock,
   ];
 
@@ -72,6 +83,61 @@ export async function* callClaudeWithCacheStreaming(
     console.error("[Claude] Erro:", error);
     yield { type: "error", error: String(error) };
   }
+}
+
+/**
+ * Builds the Haiku fallback resolver injected into the prompt loader. On a
+ * keyword "miss" for a clinical-looking message, it makes ONE short, cheap call
+ * to claude-haiku-4-5 asking which of the candidate modules best fit. Parsing is
+ * defensive: any failure returns [] so the main response is never broken.
+ */
+function makeHaikuFallbackResolver(client: Anthropic): FallbackResolver {
+  return async ({ userMessage, candidates }) => {
+    if (candidates.length === 0) return [];
+
+    try {
+      const list = candidates.map((c) => `- ${c.module_id}`).join("\n");
+      const response = await client.messages.create({
+        model: "claude-haiku-4-5",
+        max_tokens: 128,
+        messages: [
+          {
+            role: "user",
+            content:
+              "És um classificador. Dada a mensagem de um utente de um " +
+              "assistente de saúde, escolhe quais dos seguintes módulos melhor " +
+              "servem a resposta. Módulos disponíveis (module_id):\n" +
+              list +
+              "\n\nMensagem do utente:\n" +
+              userMessage +
+              "\n\nDevolve APENAS um array JSON de module_ids (subconjunto da " +
+              "lista acima), sem texto à volta, sem markdown. Se nenhum servir, " +
+              "devolve [].",
+          },
+        ],
+      });
+
+      const raw = response.content
+        .filter((block): block is Anthropic.TextBlock => block.type === "text")
+        .map((block) => block.text)
+        .join("")
+        .trim();
+
+      const cleaned = raw
+        .replace(/^```(?:json)?\s*/i, "")
+        .replace(/\s*```$/i, "")
+        .trim();
+
+      const parsed = JSON.parse(cleaned);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter(
+        (item): item is string => typeof item === "string" && item.trim().length > 0
+      );
+    } catch (error) {
+      console.warn("[Claude] Fallback de módulos falhou:", error);
+      return [];
+    }
+  };
 }
 
 /**
