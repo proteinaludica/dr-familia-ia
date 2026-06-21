@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -33,6 +34,22 @@ const STARTER_CHIPS: Record<"free" | "paid", string[]> = {
     "Vacinas do meu filho",
     "Preciso de ajuda como cuidador",
   ],
+};
+
+// Compact Markdown renderers so paragraphs/lists fit tightly inside a bubble.
+const markdownComponents = {
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p style={{ margin: "0 0 0.5rem 0" }} {...props} />
+  ),
+  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul style={{ margin: "0 0 0.5rem 0", paddingLeft: "1.25rem" }} {...props} />
+  ),
+  ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
+    <ol style={{ margin: "0 0 0.5rem 0", paddingLeft: "1.25rem" }} {...props} />
+  ),
+  li: (props: React.HTMLAttributes<HTMLLIElement>) => (
+    <li style={{ margin: "0.15rem 0" }} {...props} />
+  ),
 };
 
 export default function ChatPage() {
@@ -221,7 +238,12 @@ export default function ChatPage() {
               color: msg.role === "user" ? "white" : "black",
               wordWrap: "break-word",
             }}>
-              {msg.content}
+              {/* Assistant answers arrive as Markdown; user input stays literal. */}
+              {msg.role === "assistant" ? (
+                <ReactMarkdown components={markdownComponents}>{msg.content}</ReactMarkdown>
+              ) : (
+                msg.content
+              )}
             </div>
           </div>
         ))}
