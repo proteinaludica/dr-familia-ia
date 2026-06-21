@@ -6,6 +6,14 @@
   const API_ENDPOINT = "/api/chat";
   const STORAGE_KEY = "drfamilia_chat_history_v1";
 
+  // Static starter chips shown before any message. Mirrors the "free" tier of
+  // STARTER_CHIPS in app/chat/page.tsx (the widget cannot import from the app).
+  const STARTER_CHIPS = [
+    "Quero ver as minhas análises",
+    "Que rastreios devo fazer?",
+    "Tenho uma dúvida sobre a minha medicação",
+  ];
+
   const style = document.createElement("style");
   style.textContent = `
     #drf-btn {
@@ -60,6 +68,25 @@
       border: 1px solid #e2e8f0; border-bottom-left-radius: 4px;
     }
     .drf-typing { font-style: italic; color: #718096; }
+    /* Compact Markdown inside bot bubbles. */
+    .drf-msg-bot p { margin: 0 0 8px 0; }
+    .drf-msg-bot p:last-child { margin-bottom: 0; }
+    .drf-msg-bot ul { margin: 0 0 8px 0; padding-left: 20px; }
+    .drf-msg-bot ul:last-child { margin-bottom: 0; }
+    .drf-msg-bot li { margin: 2px 0; }
+    /* Suggestion chips (starter + dynamic follow-ups). */
+    .drf-chips {
+      align-self: flex-start; display: flex; flex-wrap: wrap; gap: 8px;
+      max-width: 100%;
+    }
+    .drf-chip {
+      background: #fff; color: ${BRAND}; border: 1px solid ${BRAND};
+      border-radius: 999px; padding: 8px 14px;
+      font-family: inherit; font-size: 14px; line-height: 1.3;
+      cursor: pointer; transition: background .15s ease, color .15s ease;
+    }
+    .drf-chip:hover { background: ${BRAND}; color: #fff; }
+    .drf-chip:disabled { opacity: .5; cursor: not-allowed; }
     #drf-input-wrap {
       border-top: 1px solid #e2e8f0; padding: 12px; background: #fff;
       display: flex; gap: 8px;
@@ -132,18 +159,114 @@
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(history)); } catch (e) {}
   }
 
+  // Escape user/assistant text before any markup is applied, to avoid XSS.
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  // Apply inline markdown (bold, italic) on already-escaped text.
+  function inlineMarkdown(str) {
+    return str
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  }
+
+  // Tiny, dependency-free Markdown -> HTML converter. Covers only: **bold**,
+  // *italic*, "- " bullet lists, and paragraphs / line breaks. HTML is escaped
+  // first so the output is safe to inject.
+  function markdownToHtml(raw) {
+    const lines = escapeHtml(raw).split("\n");
+    let html = "";
+    let para = [];
+    let list = [];
+
+    function flushPara() {
+      if (para.length) {
+        html += "<p>" + para.map(inlineMarkdown).join("<br>") + "</p>";
+        para = [];
+      }
+    }
+    function flushList() {
+      if (list.length) {
+        html += "<ul>" + list
+          .map(function (item) { return "<li>" + inlineMarkdown(item) + "</li>"; })
+          .join("") + "</ul>";
+        list = [];
+      }
+    }
+
+    lines.forEach(function (line) {
+      const bullet = line.match(/^\s*-\s+(.*)$/);
+      if (bullet) {
+        flushPara();
+        list.push(bullet[1]);
+      } else if (line.trim() === "") {
+        flushPara();
+        flushList();
+      } else {
+        flushList();
+        para.push(line);
+      }
+    });
+    flushPara();
+    flushList();
+    return html;
+  }
+
+  // Single container holding the suggestion chips at the bottom of the thread.
+  let chipsEl = null;
+
+  function clearChips() {
+    if (chipsEl && chipsEl.parentNode) chipsEl.parentNode.removeChild(chipsEl);
+    chipsEl = null;
+  }
+
+  // Render up to 4 pill chips under the latest message; clicking one sends it.
+  function renderChips(chips) {
+    clearChips();
+    if (!Array.isArray(chips) || chips.length === 0) return;
+    chipsEl = document.createElement("div");
+    chipsEl.className = "drf-chips";
+    chips.slice(0, 4).forEach(function (chip) {
+      if (typeof chip !== "string" || !chip.trim()) return;
+      const b = document.createElement("button");
+      b.className = "drf-chip";
+      b.type = "button";
+      b.textContent = chip;
+      b.addEventListener("click", function () {
+        if (sendBtn.disabled) return;
+        sendMessage(chip);
+      });
+      chipsEl.appendChild(b);
+    });
+    messagesEl.appendChild(chipsEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
   function renderHistory() {
     messagesEl.innerHTML = "";
+    // innerHTML reset detached any chips container; drop the stale reference.
+    chipsEl = null;
     if (history.length === 0) {
       const div = document.createElement("div");
       div.className = "drf-msg drf-msg-bot";
       div.textContent = "Olá! Sou o Dr. Família IA. Como o posso ajudar hoje?";
       messagesEl.appendChild(div);
+      // Starter chips, shown only before the first message.
+      renderChips(STARTER_CHIPS);
     } else {
       history.forEach((m) => {
         const div = document.createElement("div");
         div.className = "drf-msg " + (m.role === "user" ? "drf-msg-user" : "drf-msg-bot");
-        div.textContent = m.content;
+        if (m.role === "user") {
+          div.textContent = m.content;
+        } else {
+          // Assistant content is Markdown; render it safely.
+          div.innerHTML = markdownToHtml(m.content);
+        }
         messagesEl.appendChild(div);
       });
     }
@@ -186,10 +309,14 @@
 
   sendBtn.addEventListener("click", sendMessage);
 
-  async function sendMessage() {
-    const text = inputEl.value.trim();
-    if (!text) return;
+  async function sendMessage(presetText) {
+    // Accept an explicit text (from a chip) or fall back to the input field,
+    // so chips and the text box share the exact same send path.
+    const text = (typeof presetText === "string" ? presetText : inputEl.value).trim();
+    if (!text || sendBtn.disabled) return;
 
+    // Clear dynamic chips on send; they reappear with the next "chips" event.
+    clearChips();
     addUserMessage(text);
     inputEl.value = "";
     inputEl.style.height = "auto";
@@ -203,6 +330,7 @@
 
     let assembled = "";
     let firstChunk = true;
+    let pendingChips = [];
 
     try {
       const res = await fetch(API_ENDPOINT, {
@@ -244,8 +372,12 @@
                 firstChunk = false;
               }
               assembled += parsed.text;
-              botDiv.textContent = assembled;
+              // Assistant text is Markdown; render it safely on each update.
+              botDiv.innerHTML = markdownToHtml(assembled);
               messagesEl.scrollTop = messagesEl.scrollHeight;
+            } else if (parsed.type === "chips") {
+              // Follow-up suggestions for the answer just rendered.
+              pendingChips = Array.isArray(parsed.chips) ? parsed.chips : [];
             } else if (parsed.type === "error") {
               throw new Error(parsed.error || "Erro desconhecido");
             }
@@ -256,6 +388,8 @@
       if (assembled) {
         history.push({ role: "assistant", content: assembled });
         persist();
+        // Show follow-up chips under the latest answer, if any arrived.
+        renderChips(pendingChips);
       } else if (firstChunk) {
         botDiv.classList.remove("drf-typing");
         botDiv.textContent = "Sem resposta. Tente novamente.";
